@@ -98,8 +98,8 @@ int main()
     char chaine2[TAILLE_MAX] = "";
 
     //ouverture du fichier .txt
-    fichier1 = fopen("mycss1.txt", "r");
-    fichier2 = fopen("mycss2.txt", "r");
+    fichier1 = fopen("css1.txt", "r");
+    fichier2 = fopen("css2.txt", "r");
     fichier3 = fopen("result.txt", "r+");
 
     llist ma_liste = NULL;
