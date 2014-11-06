@@ -62,6 +62,8 @@ void ecriture (FILE* fichier, llist ma_liste)
 
     void remplissage(char* chaine, FILE* fichier, FILE* fichierResult, llist ma_liste)
     {
+
+
         if (fichier != NULL)
         {
         char *valeur;
@@ -75,7 +77,6 @@ void ecriture (FILE* fichier, llist ma_liste)
             {
                 valeur[j]=chaine[j];
             }
-            // On affiche la chaîne qu'on vient de lire
             valeur[TAILLE_MAX]='\0';
             ma_liste = ajouter(ma_liste,valeur);
             i++;
