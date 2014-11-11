@@ -9,7 +9,7 @@ struct element
 };
 typedef element* llist;
 
-llist ajouterEnFin(llist liste, int valeur)
+llist ajouterEnFin(llist liste, char* valeur)
 {
     /* On crée un nouvel élément */
     element* nouvelElement = malloc(sizeof(element));
@@ -22,12 +22,12 @@ llist ajouterEnFin(llist liste, int valeur)
 
     if(liste == NULL)
     {
-        /* Si la liste est videé il suffit de renvoyer l'élément créé */
+        /** Si la liste est videé il suffit de renvoyer l'élément créé */
         return nouvelElement;
     }
     else
     {
-        /* Sinon, on parcourt la liste à l'aide d'un pointeur temporaire et on
+        /** Sinon, on parcourt la liste à l'aide d'un pointeur temporaire et on
         indique que le dernier élément de la liste est relié au nouvel élément */
         element* temp=liste;
         while(temp->nxt != NULL)
@@ -40,8 +40,9 @@ llist ajouterEnFin(llist liste, int valeur)
 }
 void afficherListe(llist liste)
 {
+
     element *tmp = liste;
-    /* Tant que l'on n'est pas au bout de la liste */
+    /** Tant que l'on n'est pas au bout de la liste **/
     while(tmp != NULL)
     {
         /* On affiche */
@@ -51,26 +52,35 @@ void afficherListe(llist liste)
     }
 }
 
+/**Voila ou j'en suis, jaffiche betement les caracteres **/
+void remplissage(char* caractereActuel, FILE* fichier, llist ma_liste)
+{
+    if (fichier != NULL)
+    {
+        /**Boucle de lecture des caractères un à un */
+        do
+        {
+            caractereActuel = fgetc(fichier); // On lit le caractère
+            ma_liste = ajouterEnFin(ma_liste,caractereActuel);
+        } while (caractereActuel != EOF); // On continue tant que fgetc n'a pas retourné EOF (fin de fichier)
+
+    }
+}
+
 int main()
 {
     FILE* fichier = NULL;
     fichier = fopen("css1.txt", "r");
     llist ma_liste = NULL;
-    int caractereActuel = 0;
+    char* caractereActuel = NULL;
 
-     if (fichier != NULL)
-    {
-        int i=0;
-        char* valeur;
-        // Boucle de lecture des caractères un à un
-        do
-        {
-            caractereActuel = fgetc(fichier); // On lit le caractère
-            ajouterEnFin(ma_liste, caractereActuel);
-        } while (caractereActuel != EOF); // On continue tant que fgetc n'a pas retourné EOF (fin de fichier)
+    remplissage(caractereActuel, fichier, ma_liste);
 
-afficherListe(ma_liste);
+//afficherListe(ma_liste);
         fclose(fichier);
+
+        return 0;
+
     }
-    return 0;
-}
+
+
