@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#define TAILLE_MAX 10
 
 typedef struct element element;
 struct element
@@ -56,20 +57,24 @@ void afficherListe(llist liste)
 
 void remplissage (llist liste, FILE* fichier, char* chaine)
 {
-    if (fichier != NULL)
-{
-    do
+    if (fichier != NULL) /**si le fichier existe*/
     {
-        chaine = fgetc(fichier);
-        liste = ajouterEnFin(liste, chaine);
-    }while(chaine != EOF);
+    while(chaine != EOF) /**tant que le dernier caractere nest pas lu*/
+        {
+            chaine = fgetc(fichier);
+            if(chaine == '{') /**si le caractere lu est une accolade ouvrante*/
+                {
+
+                }
+           liste = ajouterEnFin(liste, chaine);
+        }
+    fclose(fichier);
 }
 
     else
-printf("suce");
+        printf("suce");
 
     afficherListe(liste);
-
 }
 
 int main(int argc, char **argv)
@@ -84,7 +89,7 @@ int main(int argc, char **argv)
     fichier2 = fopen("css2.txt", "r");
 
 remplissage(ma_liste1, fichier1, chaine1);
-remplissage(ma_liste2, fichier2, chaine2);
+//remplissage(ma_liste2, fichier2, chaine2);
 
     return 0;
 }
